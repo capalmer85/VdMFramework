@@ -66,7 +66,7 @@ def checkFBCTcalib(table, CalibrateFBCTtoDCCT):
     return [h_ratioB1, h_ratioB2]
 
 
-def getCurrents(datapath, scanpt):
+def getCurrents(datapath, scanpt, fill):
 
 
 #    print "beginning of getCurrents", scanpt
@@ -155,7 +155,7 @@ def getCurrents(datapath, scanpt):
                     fbct2[str(bcid+1)] = bx2df[bcid].mean()
 
         ## In 4634 even BCIDs are 4% too high in FBCT
-        elif fill == 4634:
+        elif fill == 46341:
 
             for idx, bcid in enumerate(filledBunches1):
                 if (bcid+1)%2 == 0:
@@ -214,7 +214,7 @@ def doMakeBeamCurrentFile(ConfigInfo):
         table["Scan_" + str(i+1)]=[]
         csvtable.append([str(key)] )
         for j, sp in enumerate(scanpoints):
-            avrgdcct1, avrgdcct2, avrgfbct1, avrgfbct2 = getCurrents(InputCentralPath, sp[3:])
+            avrgdcct1, avrgdcct2, avrgfbct1, avrgfbct2 = getCurrents(InputCentralPath, sp[3:], int(Fill))
 # todo: implement correcting FBCT values in case CalibrateFBCTtoDCCT =True in json
 
 #Sums over all filled bunches
